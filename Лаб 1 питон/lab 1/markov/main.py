@@ -1,4 +1,6 @@
-from interface import run_console
+
+from MarkovConsole import MarkovConsole
 
 if __name__ == "__main__":
-    run_console()
+    console = MarkovConsole()
+    console.run()

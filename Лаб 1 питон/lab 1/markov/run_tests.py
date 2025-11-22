@@ -5,7 +5,7 @@
 
 import unittest
 import sys
-from test_rule import TestRule, TestRuleEdgeCases
+from TestRule30Tests import TestRule, TestRuleEdgeCases
 
 
 def run_all_tests():
