@@ -1,0 +1,362 @@
+
+
+// ==================== ОСНОВНЫЕ КЛАССЫ ====================
+concept_network
+<- sc_node_class;
+<- concept_class;
+=> nrel_main_idtf:
+    [сеть] (* <- lang_ru;; *);;
+
+concept_node
+<- sc_node_class;
+<- concept_class;
+=> nrel_main_idtf:
+    [узел сети] (* <- lang_ru;; *);;
+
+concept_bridge
+<- sc_node_class;
+<- concept_class;
+=> nrel_main_idtf:
+    [мост] (* <- lang_ru;; *);
+    [bridge] (* <- lang_en;; *);
+=> nrel_note:
+    [Ребро, удаление которого разделяет сеть на несвязанные части] (* <- lang_ru;; *);
+    [An edge whose removal disconnects the network] (* <- lang_en;; *);;
+
+concept_network_component
+<- sc_node_class;
+<- concept_class;
+=> nrel_main_idtf:
+    [компонента сети] (* <- lang_ru;; *);
+    [network component] (* <- lang_en;; *);;
+
+concept_criticality_level
+<- sc_node_class;
+<- concept_class;
+=> nrel_main_idtf:
+    [уровень критичности] (* <- lang_ru;; *);
+    [criticality level] (* <- lang_en;; *);;
+
+// ==================== ОТНОШЕНИЯ ДЛЯ СТРУКТУРЫ СЕТИ ====================
+nrel_edge
+<- sc_node_non_role_relation;
+<- concept_binary_relation;
+=> nrel_main_idtf:
+    [ребро сети] (* <- lang_ru;; *);
+    [network edge] (* <- lang_en;; *);
+=> nrel_first_domain:
+    concept_node;
+=> nrel_second_domain:
+    concept_node;;
+
+// ==================== ОТНОШЕНИЯ ДЛЯ СВОЙСТВ РЁБЕР ====================
+nrel_length
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [длина] (* <- lang_ru;; *);
+    [length] (* <- lang_en;; *);;
+
+nrel_cost
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [стоимость] (* <- lang_ru;; *);
+    [cost] (* <- lang_en;; *);;
+
+nrel_traffic
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [интенсивность трафика] (* <- lang_ru;; *);
+    [traffic intensity] (* <- lang_en;; *);;
+
+nrel_capacity
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [пропускная способность] (* <- lang_ru;; *);
+    [capacity] (* <- lang_en;; *);;
+
+// ==================== ОТНОШЕНИЯ ДЛЯ РЕЗУЛЬТАТОВ ====================
+nrel_is_bridge_result
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [является мостом (результат)] (* <- lang_ru;; *);
+    [is bridge (result)] (* <- lang_en;; *);;
+
+nrel_connects_components
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [соединяет компоненты] (* <- lang_ru;; *);
+    [connects components] (* <- lang_en;; *);;
+
+nrel_component_nodes
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [узлы компоненты] (* <- lang_ru;; *);
+    [component nodes] (* <- lang_en;; *);;
+
+nrel_criticality_score
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [оценка критичности] (* <- lang_ru;; *);
+    [criticality score] (* <- lang_en;; *);;
+
+nrel_failure_impact
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [влияние отказа] (* <- lang_ru;; *);
+    [failure impact] (* <- lang_en;; *);;
+
+// ==================== РОЛЕВЫЕ ОТНОШЕНИЯ ====================
+rrel_target_network
+<- sc_node_role_relation;
+=> nrel_main_idtf:
+    [целевая сеть] (* <- lang_ru;; *);
+    [target network] (* <- lang_en;; *);;
+
+rrel_analysis_parameters
+<- sc_node_role_relation;
+=> nrel_main_idtf:
+    [параметры анализа] (* <- lang_ru;; *);
+    [analysis parameters] (* <- lang_en;; *);;
+
+// ==================== ПРИМЕР ТРАНСПОРТНОЙ СЕТИ ====================
+transport_network_example
+<- concept_network;
+=> nrel_main_idtf:
+    [Пример транспортной сети] (* <- lang_ru;; *);
+    [Transport network example] (* <- lang_en;; *);
+=> nrel_note:
+    [Транспортная сеть с 6 узлами (A-F) и 8 рёбрами] (* <- lang_ru;; *);
+    [Transport network with 6 nodes and 8 edges] (* <- lang_en;; *);;
+
+// -------------------- УЗЛЫ СЕТИ --------------------
+node_A
+<- concept_node;
+=> nrel_main_idtf:
+    [A] (* <- lang_ru;; *);
+    [A] (* <- lang_en;; *);;
+
+node_B
+<- concept_node;
+=> nrel_main_idtf:
+    [B] (* <- lang_ru;; *);
+    [B] (* <- lang_en;; *);;
+
+node_C
+<- concept_node;
+=> nrel_main_idtf:
+    [C] (* <- lang_ru;; *);
+    [C] (* <- lang_en;; *);;
+
+node_D
+<- concept_node;
+=> nrel_main_idtf:
+    [D] (* <- lang_ru;; *);
+    [D] (* <- lang_en;; *);;
+
+node_E
+<- concept_node;
+=> nrel_main_idtf:
+    [E] (* <- lang_ru;; *);
+    [E] (* <- lang_en;; *);;
+
+node_F
+<- concept_node;
+=> nrel_main_idtf:
+    [F] (* <- lang_ru;; *);
+    [F] (* <- lang_en;; *);;
+
+// -------------------- РЁБРА СЕТИ (ОТНОШЕНИЯ) --------------------
+// Кольцо A-B-C-D-E-F-A
+edge_AB
+=> nrel_main_idtf:
+    [Ребро A-B] (* <- lang_ru;; *);
+    [Edge A-B] (* <- lang_en;; *);
+<- nrel_edge;
+=> nrel_first_domain: node_A;
+=> nrel_second_domain: node_B;
+=> nrel_length: [120];
+=> nrel_cost: [2500];
+=> nrel_traffic: [1000];;
+
+edge_BC
+=> nrel_main_idtf:
+    [Ребро B-C] (* <- lang_ru;; *);
+    [Edge B-C] (* <- lang_en;; *);
+<- nrel_edge;
+=> nrel_first_domain: node_B;
+=> nrel_second_domain: node_C;
+=> nrel_length: [80];
+=> nrel_cost: [1800];
+=> nrel_traffic: [800];;
+
+edge_CD
+=> nrel_main_idtf:
+    [Ребро C-D] (* <- lang_ru;; *);
+    [Edge C-D] (* <- lang_en;; *);
+<- nrel_edge;
+=> nrel_first_domain: node_C;
+=> nrel_second_domain: node_D;
+=> nrel_length: [90];
+=> nrel_cost: [2000];
+=> nrel_traffic: [700];;
+
+edge_DE
+=> nrel_main_idtf:
+    [Ребро D-E] (* <- lang_ru;; *);
+    [Edge D-E] (* <- lang_en;; *);
+<- nrel_edge;
+=> nrel_first_domain: node_D;
+=> nrel_second_domain: node_E;
+=> nrel_length: [110];
+=> nrel_cost: [2300];
+=> nrel_traffic: [900];;  // Исправлено с nrel_travel на nrel_traffic
+
+edge_EF
+=> nrel_main_idtf:
+    [Ребро E-F] (* <- lang_ru;; *);
+    [Edge E-F] (* <- lang_en;; *);
+<- nrel_edge;
+=> nrel_first_domain: node_E;
+=> nrel_second_domain: node_F;
+=> nrel_length: [95];
+=> nrel_cost: [2100];
+=> nrel_traffic: [850];;
+
+edge_FA
+=> nrel_main_idtf:
+    [Ребро F-A] (* <- lang_ru;; *);
+    [Edge F-A] (* <- lang_en;; *);
+<- nrel_edge;
+=> nrel_first_domain: node_F;
+=> nrel_second_domain: node_A;
+=> nrel_length: [130];
+=> nrel_cost: [2700];
+=> nrel_traffic: [1100];;
+
+// Дополнительные связи
+edge_BE
+=> nrel_main_idtf:
+    [Ребро B-E] (* <- lang_ru;; *);
+    [Edge B-E] (* <- lang_en;; *);
+<- nrel_edge;
+=> nrel_first_domain: node_B;
+=> nrel_second_domain: node_E;
+=> nrel_length: [150];
+=> nrel_cost: [3000];
+=> nrel_traffic: [600];;
+
+edge_CF
+=> nrel_main_idtf:
+    [Ребро C-F] (* <- lang_ru;; *);
+    [Edge C-F] (* <- lang_en;; *);
+<- nrel_edge;
+=> nrel_first_domain: node_C;
+=> nrel_second_domain: node_F;
+=> nrel_length: [140];
+=> nrel_cost: [2900];
+=> nrel_traffic: [550];;
+
+// ==================== ДЕЙСТВИЯ ====================
+action_find_bridges
+<- sc_node_class;
+=> nrel_main_idtf:
+    [действие поиска мостов в сети] (* <- lang_ru;; *);
+    [find bridges in network action] (* <- lang_en;; *);
+=> nrel_note:
+    [Находит критические соединения и анализирует их влияние] (* <- lang_ru;; *);
+    [Finds critical connections and analyzes their impact] (* <- lang_en;; *);;
+
+action_assess_criticality  // ДОБАВИЛ второй агент
+<- sc_node_class;
+=> nrel_main_idtf:
+    [действие оценки критичности] (* <- lang_ru;; *);
+    [assess criticality action] (* <- lang_en;; *);;
+
+// ==================== НОВЫЕ ОТНОШЕНИЯ ДЛЯ ВТОРОГО АГЕНТА ====================
+nrel_requires_criticality_assessment  // ДОБАВИЛ
+<- sc_node_non_role_relation;
+=> nrel_main_idtf:
+    [требует оценки критичности] (* <- lang_ru;; *);
+    [requires criticality assessment] (* <- lang_en;; *);;
+
+// ==================== СТРУКТУРЫ РЕЗУЛЬТАТОВ ====================
+concept_bridges_analysis_result
+<- sc_node_structure;
+=> nrel_main_idtf:
+    [результат анализа мостов] (* <- lang_ru;; *);
+    [bridges analysis result] (* <- lang_en;; *);;
+
+concept_bridge_report
+<- sc_node_structure;
+=> nrel_main_idtf:
+    [отчёт по мосту] (* <- lang_ru;; *);
+    [bridge report] (* <- lang_en;; *);;
+
+concept_component_description
+<- sc_node_structure;
+=> nrel_main_idtf:
+    [описание компоненты] (* <- lang_ru;; *);
+    [component description] (* <- lang_en;; *);;
+
+// ==================== ПРИМЕРЫ КРИТИЧЕСКИХ УРОВНЕЙ ====================
+criticality_high
+<- concept_criticality_level;
+=> nrel_main_idtf:
+    [высокая критичность] (* <- lang_ru;; *);
+    [high criticality] (* <- lang_en;; *);;
+
+criticality_medium
+<- concept_criticality_level;
+=> nrel_main_idtf:
+    [средняя критичность] (* <- lang_ru;; *);
+    [medium criticality] (* <- lang_en;; *);;
+
+criticality_low
+<- concept_criticality_level;
+=> nrel_main_idtf:
+    [низкая критичность] (* <- lang_ru;; *);
+    [low criticality] (* <- lang_en;; *);;
+
+// ==================== ПРИМЕРЫ ВЛИЯНИЯ ОТКАЗОВ ====================
+impact_catastrophic
+<- sc_node_class;
+=> nrel_main_idtf:
+    [катастрофическое влияние] (* <- lang_ru;; *);
+    [catastrophic impact] (* <- lang_en;; *);;
+
+impact_high
+<- sc_node_class;
+=> nrel_main_idtf:
+    [высокое влияние] (* <- lang_ru;; *);
+    [high impact] (* <- lang_en;; *);;
+
+impact_moderate
+<- sc_node_class;
+=> nrel_main_idtf:
+    [умеренное влияние] (* <- lang_ru;; *);
+    [moderate impact] (* <- lang_en;; *);;
+
+impact_low
+<- sc_node_class;
+=> nrel_main_idtf:
+    [низкое влияние] (* <- lang_ru;; *);
+    [low impact] (* <- lang_en;; *);;
+
+// ==================== РЕКОМЕНДАЦИИ ====================
+recommendation_immediate_redundancy
+<- sc_node_class;
+=> nrel_main_idtf:
+    [немедленное резервирование] (* <- lang_ru;; *);
+    [immediate redundancy] (* <- lang_en;; *);;
+
+recommendation_planned_redundancy
+<- sc_node_class;
+=> nrel_main_idtf:
+    [плановое резервирование] (* <- lang_ru;; *);
+    [planned redundancy] (* <- lang_en;; *);;
+
+recommendation_monitoring
+<- sc_node_class;
+=> nrel_main_idtf:
+    [усиленный мониторинг] (* <- lang_ru;; *);
+    [enhanced monitoring] (* <- lang_en;; *);;
